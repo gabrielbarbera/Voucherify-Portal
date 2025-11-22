@@ -7,6 +7,7 @@ import tailwindcss from '@tailwindcss/vite';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 export default defineConfig({
+  base: '/Voucherify-Portal/',
   plugins: [
     react({
       jsxRuntime: 'automatic',
@@ -21,5 +22,8 @@ export default defineConfig({
   server: {
     port: 5173,
     host: '0.0.0.0',
+  },
+  build: {
+    outDir: 'dist',
   },
 });
