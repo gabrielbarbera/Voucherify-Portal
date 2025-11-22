@@ -33,7 +33,7 @@ export const ProductPage: React.FC = () => {
             <span className="text-slate-400 text-sm ml-2">(128 reviews)</span>
           </div>
 
-          <h1 className="text-4xl font-bold text-slate-900 mb-4 font-serif">Premium Food Box</h1>
+          <h1 className="text-4xl font-bold text-slate-900 mb-4 font-sans">Premium Food Box</h1>
           <div className="text-2xl text-slate-700 mb-6 font-medium">$20.00</div>
 
           <p className="text-slate-600 mb-8 leading-relaxed">

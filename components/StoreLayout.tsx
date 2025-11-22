@@ -13,7 +13,7 @@ export const StoreLayout: React.FC<StoreLayoutProps> = ({ children }) => {
       <header className="border-b border-slate-100 sticky top-0 bg-white z-50">
         <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
           <div className="flex items-center space-x-8">
-            <Link to="/store" className="text-2xl font-serif font-bold text-slate-900 tracking-tight">
+            <Link to="/store" className="text-2xl font-sans font-bold text-slate-900 tracking-tight">
               FreshBox<span className="text-orange-500">.</span>
             </Link>
             <nav className="hidden md:flex space-x-6 text-sm font-medium text-slate-600">

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { LayoutDashboard, PlusCircle, LogOut, Tag } from 'lucide-react';
+import { LayoutDashboard, PlusCircle, LogOut } from 'lucide-react';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -23,10 +23,9 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
       {/* Sidebar */}
       <aside className="w-full md:w-64 bg-white border-r border-slate-200 flex flex-col">
         <div className="p-6 border-b border-slate-100">
-          <div className="flex items-center space-x-2 text-brand-600">
-            <Tag className="h-6 w-6 fill-current" />
-            <span className="text-xl font-bold tracking-tight text-slate-900">Voucherify</span>
-          </div>
+          <Link to="/dashboard" className="flex items-center space-x-2">
+            <img src="/logo.svg" alt="Voucherify" className="h-8" />
+          </Link>
         </div>
 
         <nav className="flex-1 p-4 space-y-1 overflow-y-auto">

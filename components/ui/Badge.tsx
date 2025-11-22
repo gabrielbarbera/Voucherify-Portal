@@ -9,7 +9,7 @@ export const Badge: React.FC<BadgeProps> = ({ status }) => {
   switch (status) {
     case VoucherStatus.ACTIVE:
       return (
-        <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 border border-green-200">
+        <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-brand-100 text-brand-800 border border-brand-200">
           Active
         </span>
       );

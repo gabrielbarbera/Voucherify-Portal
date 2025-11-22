@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { Tag, ArrowRight, ShoppingBag } from 'lucide-react';
+import { ArrowRight, ShoppingBag } from 'lucide-react';
 import { Card } from '../components/ui/Card';
 import { Button } from '../components/ui/Button';
 
@@ -21,8 +21,8 @@ export const Login: React.FC = () => {
     <div className="min-h-screen bg-slate-50 flex items-center justify-center p-4">
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center h-12 w-12 rounded-xl bg-brand-100 text-brand-600 mb-4">
-            <Tag className="h-6 w-6 fill-current" />
+          <div className="flex justify-center mb-4">
+            <img src="/logo.svg" alt="Voucherify" className="h-12" />
           </div>
           <h1 className="text-2xl font-bold text-slate-900">Sign in to Portal</h1>
           <p className="text-slate-500 mt-2">Manage your product vouchers and redemptions</p>

@@ -12,11 +12,11 @@ export const OrderConfirmation: React.FC = () => {
   return (
     <StoreLayout>
       <div className="max-w-2xl mx-auto text-center py-12">
-        <div className="inline-flex items-center justify-center h-20 w-20 rounded-full bg-green-100 text-green-600 mb-8 animate-bounce">
+        <div className="inline-flex items-center justify-center h-20 w-20 rounded-full bg-brand-100 text-brand-600 mb-8 animate-bounce">
           <CheckCircle className="h-10 w-10" />
         </div>
         
-        <h1 className="text-4xl font-serif font-bold text-slate-900 mb-4">Order Confirmed</h1>
+        <h1 className="text-4xl font-sans font-bold text-slate-900 mb-4">Order Confirmed</h1>
         <p className="text-lg text-slate-600 mb-12">
           Thank you for your order. We've received your request and are preparing your box!
         </p>

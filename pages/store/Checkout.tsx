@@ -62,7 +62,7 @@ export const Checkout: React.FC = () => {
 
   return (
     <StoreLayout>
-      <h1 className="text-3xl font-serif font-bold text-slate-900 mb-8">Checkout</h1>
+      <h1 className="text-3xl font-sans font-bold text-slate-900 mb-8">Checkout</h1>
       
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* Left: Billing & Payment */}
@@ -179,9 +179,9 @@ export const Checkout: React.FC = () => {
                           </a>
                         </div>
                       ) : (
-                        <div className="bg-white border border-green-200 rounded-md p-3 flex items-start justify-between">
+                        <div className="bg-white border border-brand-200 rounded-md p-3 flex items-start justify-between">
                           <div>
-                            <p className="text-sm font-bold text-green-700 flex items-center">
+                            <p className="text-sm font-bold text-brand-700 flex items-center">
                               <Check className="h-4 w-4 mr-1" /> Voucher Applied
                             </p>
                             <p className="text-xs text-slate-500 mt-1 font-mono">{appliedVoucher.code}</p>
@@ -220,7 +220,7 @@ export const Checkout: React.FC = () => {
               </div>
               
               {appliedVoucher && (
-                <div className="flex justify-between text-green-600 font-medium pt-2 border-t border-dashed border-slate-200">
+                <div className="flex justify-between text-brand-600 font-medium pt-2 border-t border-dashed border-slate-200">
                   <span>Voucher ({appliedVoucher.code.substring(0,4)}...)</span>
                   <span>-${appliedVoucher.discount.toFixed(2)}</span>
                 </div>

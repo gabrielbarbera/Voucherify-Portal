@@ -36,7 +36,7 @@ export const VoucherSuccess: React.FC = () => {
   return (
     <Layout>
       <div className="max-w-xl mx-auto text-center pt-8">
-        <div className="inline-flex items-center justify-center h-16 w-16 rounded-full bg-green-100 text-green-600 mb-6 animate-bounce">
+        <div className="inline-flex items-center justify-center h-16 w-16 rounded-full bg-brand-100 text-brand-600 mb-6 animate-bounce">
           <CheckCircle className="h-8 w-8" />
         </div>
         
@@ -55,7 +55,7 @@ export const VoucherSuccess: React.FC = () => {
             <Button onClick={handleCopy} variant="outline" className="min-w-[140px]">
               {copied ? (
                 <>
-                  <CheckCircle className="h-4 w-4 mr-2 text-green-600" /> Copied
+                  <CheckCircle className="h-4 w-4 mr-2 text-brand-600" /> Copied
                 </>
               ) : (
                 <>

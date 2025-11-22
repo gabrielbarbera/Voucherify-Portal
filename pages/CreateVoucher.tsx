@@ -183,7 +183,7 @@ export const CreateVoucher: React.FC = () => {
                       </div>
                       
                       <div className="flex items-center space-x-2 text-xs text-slate-500 mt-2">
-                        <ShieldCheck className="h-4 w-4 text-green-600" />
+                        <ShieldCheck className="h-4 w-4 text-brand-600" />
                         <span>Payments are secure and encrypted.</span>
                       </div>
                     </>
