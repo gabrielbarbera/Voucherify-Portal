@@ -1,0 +1,5 @@
+{
+  "name": "Voucherify Portal",
+  "description": "A modern voucher management portal allowing users to issue, track, and redeem product vouchers using a clean, responsive UI.",
+  "requestFramePermissions": []
+}
