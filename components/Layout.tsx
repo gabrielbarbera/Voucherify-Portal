@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { LayoutDashboard, PlusCircle, LogOut } from 'lucide-react';
+import logo from '../src/assets/logo.svg';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -24,7 +25,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
       <aside className="w-full md:w-64 bg-white border-r border-slate-200 flex flex-col">
         <div className="p-6 border-b border-slate-100">
           <Link to="/dashboard" className="flex items-center space-x-2">
-            <img src="/logo.svg" alt="Voucherify" className="h-8" />
+            <img src={logo} alt="Voucherify" className="h-8" />
           </Link>
         </div>
 

@@ -3,6 +3,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import { ArrowRight, ShoppingBag } from 'lucide-react';
 import { Card } from '../components/ui/Card';
 import { Button } from '../components/ui/Button';
+import logo from '../src/assets/logo.svg';
 
 export const Login: React.FC = () => {
   const navigate = useNavigate();
@@ -22,7 +23,7 @@ export const Login: React.FC = () => {
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
           <div className="flex justify-center mb-4">
-            <img src="/logo.svg" alt="Voucherify" className="h-12" />
+            <img src={logo} alt="Voucherify" className="h-12" />
           </div>
           <h1 className="text-2xl font-bold text-slate-900">Sign in to Portal</h1>
           <p className="text-slate-500 mt-2">Manage your product vouchers and redemptions</p>
