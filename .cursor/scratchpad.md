@@ -12,7 +12,6 @@
 - Created `.cursor/scratchpad.md` for project tracking
 - Created `SETUP.md` with comprehensive setup instructions
 - Verified all dependencies are installed
-- Removed unnecessary Gemini API configuration (not used in application)
 - Fixed Internal Server Error by removing conflicting importmap from index.html
 
 ---
@@ -47,8 +46,7 @@ _No blockers at the moment_
 - Project uses Vite as build tool
 - **No external API keys needed** - Application is purely client-side using localStorage
 - Dependencies are already installed and up to date
-- Removed unnecessary Gemini API references (leftover from AI Studio template)
-- **Fixed Internal Server Error**: Removed importmap from index.html that was trying to load dependencies from aistudiocdn.com. Vite handles module resolution automatically, so the importmap was causing conflicts.
+- **Fixed Internal Server Error**: Removed importmap from index.html that was causing conflicts. Vite handles module resolution automatically, so the importmap was unnecessary.
 
 ---
 
