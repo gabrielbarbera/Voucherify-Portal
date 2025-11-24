@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { CreditCard, ShoppingBag, ShieldCheck, ArrowLeft, Loader2 } from 'lucide-react';
+import { ShoppingBag, ArrowLeft } from 'lucide-react';
 import { Layout } from '../components/Layout';
 import { Card } from '../components/ui/Card';
 import { Button } from '../components/ui/Button';
+import { Modal } from '../components/ui/Modal';
+import { PaymentFlow, PaymentFlowData } from '../components/PaymentFlow';
 import { createVoucher } from '../services/voucherService';
 
 export const CreateVoucher: React.FC = () => {
@@ -26,6 +28,7 @@ export const CreateVoucher: React.FC = () => {
   });
 
   const [step, setStep] = useState<'details' | 'payment'>('details');
+  const [isPaymentModalOpen, setIsPaymentModalOpen] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
 
   useEffect(() => {
@@ -39,22 +42,32 @@ export const CreateVoucher: React.FC = () => {
     e.preventDefault();
     if (step === 'details') {
       setStep('payment');
-    } else {
-      setIsProcessing(true);
-      // Simulate Payment Gateway delay
-      setTimeout(() => {
-        const newVoucher = createVoucher({
-          productName: formData.productName,
-          amount: formData.amount,
-          currency: 'USD',
-          ownerName: formData.ownerName,
-          ownerEmail: formData.ownerEmail
-        });
-        
-        setIsProcessing(false);
-        navigate(`/success/${newVoucher.id}`, { state: { fromCreation: true } });
-      }, 2000);
+      setIsPaymentModalOpen(true);
     }
+  };
+
+  const handlePaymentComplete = (paymentData: PaymentFlowData) => {
+    setIsPaymentModalOpen(false);
+    setIsProcessing(true);
+    
+    // Create voucher with the transferred amount
+    setTimeout(() => {
+      const newVoucher = createVoucher({
+        productName: formData.productName,
+        amount: paymentData.amount,
+        currency: 'USD',
+        ownerName: formData.ownerName,
+        ownerEmail: formData.ownerEmail
+      });
+      
+      setIsProcessing(false);
+      navigate(`/success/${newVoucher.id}`, { state: { fromCreation: true } });
+    }, 500);
+  };
+
+  const handlePaymentModalClose = () => {
+    setIsPaymentModalOpen(false);
+    setStep('details');
   };
 
   return (
@@ -136,7 +149,7 @@ export const CreateVoucher: React.FC = () => {
                     </>
                   ) : (
                     <>
-                      {/* Fake Payment Form */}
+                      {/* Payment Summary */}
                       <div className="bg-slate-50 p-4 rounded-lg border border-slate-200 mb-4">
                         <div className="flex justify-between items-center text-sm mb-2">
                           <span className="text-slate-500">Total to pay</span>
@@ -148,66 +161,45 @@ export const CreateVoucher: React.FC = () => {
                         </div>
                       </div>
 
-                      <div>
-                        <label className="block text-sm font-medium text-slate-700 mb-1">Card Number</label>
-                        <div className="relative">
-                          <CreditCard className="absolute left-3 top-2.5 h-4 w-4 text-slate-400" />
-                          <input 
-                            type="text" 
-                            placeholder="0000 0000 0000 0000"
-                            className="w-full pl-9 pr-4 py-2 bg-white text-slate-900 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500"
-                            defaultValue="4242 4242 4242 4242"
-                          />
-                        </div>
-                      </div>
-
-                      <div className="grid grid-cols-2 gap-4">
-                        <div>
-                          <label className="block text-sm font-medium text-slate-700 mb-1">Expiry</label>
-                          <input 
-                            type="text" 
-                            placeholder="MM/YY"
-                            className="w-full px-3 py-2 bg-white text-slate-900 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500"
-                            defaultValue="12/25"
-                          />
-                        </div>
-                        <div>
-                          <label className="block text-sm font-medium text-slate-700 mb-1">CVC</label>
-                          <input 
-                            type="text" 
-                            placeholder="123"
-                            className="w-full px-3 py-2 bg-white text-slate-900 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500"
-                            defaultValue="123"
-                          />
-                        </div>
-                      </div>
-                      
-                      <div className="flex items-center space-x-2 text-xs text-slate-500 mt-2">
-                        <ShieldCheck className="h-4 w-4 text-brand-600" />
-                        <span>Payments are secure and encrypted.</span>
+                      <div className="text-center py-8">
+                        <p className="text-slate-600 mb-4">
+                          Click the button below to proceed with Interac e-Transfer payment.
+                        </p>
+                        <Button
+                          type="button"
+                          onClick={() => setIsPaymentModalOpen(true)}
+                          fullWidth
+                        >
+                          Open Payment Modal
+                        </Button>
                       </div>
                     </>
                   )}
 
                   <div className="pt-4">
-                    <Button type="submit" fullWidth disabled={isProcessing}>
-                      {isProcessing ? (
-                        <>
-                          <Loader2 className="h-4 w-4 animate-spin mr-2" /> Processing...
-                        </>
-                      ) : (
-                        step === 'details' ? 'Continue to Payment' : `Pay $${formData.amount.toFixed(2)}`
-                      )}
-                    </Button>
-                    {step === 'payment' && (
-                      <button 
-                        type="button"
-                        onClick={() => setStep('details')}
-                        className="w-full text-center text-sm text-slate-500 mt-4 hover:text-slate-800"
-                        disabled={isProcessing}
-                      >
-                        Go back
-                      </button>
+                    {step === 'details' ? (
+                      <Button type="submit" fullWidth disabled={isProcessing}>
+                        Continue to Payment
+                      </Button>
+                    ) : (
+                      <>
+                        <Button
+                          type="button"
+                          onClick={() => setIsPaymentModalOpen(true)}
+                          fullWidth
+                          disabled={isProcessing}
+                        >
+                          {isProcessing ? 'Processing...' : `Pay $${formData.amount.toFixed(2)}`}
+                        </Button>
+                        <button 
+                          type="button"
+                          onClick={() => setStep('details')}
+                          className="w-full text-center text-sm text-slate-500 mt-4 hover:text-slate-800"
+                          disabled={isProcessing}
+                        >
+                          Go back
+                        </button>
+                      </>
                     )}
                   </div>
                </form>
@@ -234,6 +226,20 @@ export const CreateVoucher: React.FC = () => {
           </div>
         </div>
       </div>
+
+      {/* Payment Modal */}
+      <Modal
+        isOpen={isPaymentModalOpen}
+        onClose={handlePaymentModalClose}
+        size="lg"
+      >
+        <PaymentFlow
+          amount={formData.amount}
+          productName={formData.productName}
+          onComplete={handlePaymentComplete}
+          onClose={handlePaymentModalClose}
+        />
+      </Modal>
     </Layout>
   );
 };
